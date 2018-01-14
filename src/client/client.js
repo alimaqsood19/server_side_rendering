@@ -2,9 +2,22 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './components/Home';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './Routes';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'; //thunk handles async action creators
+import { Provider } from 'react-redux';
 
-ReactDOM.hydrate(<Home />, document.querySelector('#root'));
+const store = createStore(reducers, {}, applyMiddleware(thunk));
+
+ReactDOM.hydrate(
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
+  </Provider>,
+  document.querySelector('#root')
+);
 
 // When this code gets rendered on client side, there is already content inside of that div with id Root from the
 //server, when we call this ReactDOM.hydrate we are not replacing that code we are adding to it, setuping all the

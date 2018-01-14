@@ -1,10 +1,18 @@
 //Function that renders our react app and returns a string
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import Home from '../client/components/Home';
+import { StaticRouter } from 'react-router-dom';
+import Routes from '../client/Routes';
+import { Provider } from 'react-redux';
 
-export default () => {
-  const content = renderToString(<Home />); //This is the component we want to render as a string
+export default (req, store) => {
+  const content = renderToString(
+    <Provider store={store}>
+      <StaticRouter location={req.path} context={{}}>
+        <Routes />
+      </StaticRouter>
+    </Provider>
+  ); //This is the component we want to render as a string
   //JSX gets converted to ES5 code before it gets rendered to the users screen, so we need to compile this as we would usually on our client side server
   //Webpack -> Babel -> bundle.js (normally done on client side) but can also be done on server side
   return `

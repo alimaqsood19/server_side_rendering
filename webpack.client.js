@@ -11,7 +11,7 @@ const config = {
   //Tell webpack where to put the output file (bundle.js) that is generated
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public') //__dirname is a reference to the current directory we are working in, and put it in a folder called build
+    path: path.resolve(__dirname, 'public') //__dirname is a reference to the current directory we are working in, and put it in a folder called public
   }
 };
 
